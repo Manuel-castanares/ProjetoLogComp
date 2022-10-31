@@ -1,21 +1,46 @@
 ## EBNF Linguagem Tennis:
 
-### Tipos:
+string = """, Letter, {Letter}, """
 
-string = Letter, {Letter}
-
-Letter = A | B | C | ... | Z | a | b | c | ... | z
+Letter = (A | B | C | ... | Z | a | b | c | ... | z)
 
 int = Number, {Number}
 
-Number = 0 | 1 | 2 | ... | 9
+Number = (0 | 1 | 2 | ... | 9)
 
-constante = string | int
+special-symbols = symbols, {symbols}
 
-tipo = "String" | "int"
+symbols = (! | @ | # | $ | % | ^ | & | * | ( | ) | _ | - | + | = | { | } | [ | ] | : | ; | , | . | < | > | ? | /)
 
-identificador = Letter, {Letter | "_" | Number}
+constant = string | int | special-symbols
 
-definição-tipo = "var" identificador ":" tipo {"=" constante} ";"
+type = "String" | "int"
 
-definição-tipo-multivar = "var" identificador "," {identificador} ":" tipo ";"
+identifier = Letter, {Letter | "_" | Number}
+
+define-type = "ace", identifier, {","}, {identifier}, ":", type, ";"
+
+Block = "{", {statement}, "}"
+
+assignment = identifier, "=", RelExp, ";"
+
+print = "Serve", "(" RelExp ")", ";"
+
+while = "Deuce", "(" RelExp ")", statement
+
+if-else = "In", "(" RelExp ")", statement, ["Out", statement]
+
+statement = (lambda | assignment | print | define-type | while | Block | if-else)
+
+RelExp = Expr, {("==" | "<" | ">" | "."), Expr}
+
+Expr = Term, {("+" | "-" | "||"), Term}
+
+Term = Factor, {("*" | "/" | "&&"), Factor}
+
+Factor = int | string | (("+" | "-" | "!" ), Factor) | ("(", RelExp, ")") | read
+
+read = "Rally", "(", ")" 
+
+
+
