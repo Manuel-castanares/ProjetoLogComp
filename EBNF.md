@@ -20,6 +20,10 @@ identifier = Letter, {Letter | "_" | Number}
 
 define-type = "ace", identifier, {","}, {identifier}, ":", type, ";"
 
+FUNCT = "Court", identifier, "(", {identifier}, ")", "{", {statement}, "return", identifier, "}"
+
+Init = ({FUNCT} | {Block})
+
 Block = "{", {statement}, "}"
 
 assignment = identifier, "=", RelExp, ";"

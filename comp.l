@@ -33,6 +33,8 @@
 "Ace"       return VAR;
 "String"    return STRING;
 "int"       return INT;
+"Court"     return FUNCTION;
+"return"    return RETURN;
 
 [1-9][0-9]*     return NUM;
 [a-zA-Z][a-zA-Z0-9_]*   return IDENTIFICADOR;

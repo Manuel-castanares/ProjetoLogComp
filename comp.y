@@ -2,7 +2,7 @@
 
 %}
 
-%start Block
+%start Init
 %token ABRECHAVE
 %token FECHACHAVE
 %token MAIS
@@ -34,9 +34,32 @@
 %token NUM
 %token IDENTIFICADOR
 %token STRINGVALUE
+%token FUNCTION
+%token RETURN
 
 %%
+Init    : FUNCT Init
+        | Block
+        ;
 
-Block : 
+FUNCT   : FUNCTION IDENTIFICADOR PARENTESQ PARAMETROS PARENTDIR ABRECHAVE STATEMENTS RETURN DEVOLUCAO PONTOEVIRGULA FECHACHAVE
+        ;
+
+DEVOLUCAO   : 
+            | STRINGVALUE
+            | NUM
+            ;
+
+STATEMENTS  : 
+            | statement
+            | statement STATEMENTS
+            ;
+
+PARAMETROS  : 
+            | IDENTIFICADOR
+            | VIRGULA IDENTIFICADOR PARAMETROS
+            ;
+
+Block   : ABRECHAVE
 
 %%
