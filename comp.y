@@ -60,6 +60,75 @@ PARAMETROS  :
             | VIRGULA IDENTIFICADOR PARAMETROS
             ;
 
-Block   : ABRECHAVE
+Block   : ABRECHAVE DENTRO FECHACHAVE
+        ;
+
+DENTRO  : STATEMENTS
+        ;
+
+statement   : PONTOEVIRGULA
+            | IDENTIFICADOR IGUAL RELEXP PONTOEVIRGULA
+            | PRINT PARENTESQ RELEXP PARENTDIR PONTOEVIRGULA
+            | VAR PARAMETROS DOISP TIPO PONTOEVIRGULA
+            | WHILE PARENTESQ RELEXP PARENTDIR statement
+            | Block
+            | if-else
+            ;
+
+if-else     : IF PARENTESQ RELEXP PARENTDIR statement else
+            ;
+
+else        : 
+            | statement
+            ;
+
+TIPO    : INT
+        | STRING
+        ;
+
+RELEXP  : EXPR
+        | EXPR OPERACOESRELEXP RELEXP
+        ;
+
+OPERACOESRELEXP     : IGUALIGUAL
+                    | MENOR
+                    | MAIOR
+                    | CONCAT
+                    ;
+
+EXPR    : TERM
+        | TERM OPERACOESEXPR EXPR
+        ;
+
+OPERACOESEXPR   : MAIS
+                | MENOS
+                | OR
+                ;
+
+TERM    : FACTOR
+        | FACTOR OPERACOESTERM TERM
+        ;
+
+OPERACOESTERM   : MULT
+                | DIV
+                | AND
+                ;
+
+FACTOR  : NUM
+        | STRINGVALUE
+        | IDENTIFICADOR
+        | BINOPS FACTOR
+        | PARENTESQ RELEXP PARENTDIR
+        | READ PARENTESQ PARENTDIR
+        ; 
+
+BINOPS  : MAIS
+        | MENOS
+        | NOT
+        ; 
 
 %%
+
+int main(void){
+    return yyparse();
+}
