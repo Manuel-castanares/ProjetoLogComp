@@ -1,0 +1,29 @@
+
+Court soma(x: i32, y: i32) -> i32 {
+  ace a: i32;
+  a = x + y;
+  Serve(a);
+  return a;
+}
+Court Main() {
+  ace a: i32;
+  ace b: i32;
+  ace c: i32;
+  c = Rally();
+  a = 3;
+  b = soma(a, c);
+  Deuce(b<10){
+    a = a + 1;
+    b = soma(a, c);
+    Serve(b);
+  }
+  In(a<6){
+    Serve("oi");
+  } Out {
+    Serve("tchau");
+  }
+  Serve("a final: ");
+  Serve(a);
+  Serve("b final: ");
+  Serve(b);
+}

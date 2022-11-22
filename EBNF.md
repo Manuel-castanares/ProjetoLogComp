@@ -20,9 +20,9 @@ identifier = Letter, {Letter | "_" | Number}
 
 define-type = "ace", identifier, {","}, {identifier}, ":", type, ";"
 
-FUNCT = "Court", identifier, "(", {identifier}, ")", "{", {statement}, "return", identifier, "}"
+Declaration = "Court", identifier, "(", [{define-type}], {[",", {define-type}]}, ")", ["->", type], Block
 
-Init = ({FUNCT} | {Block})
+Program = (lambda | {Declaration})
 
 Block = "{", {statement}, "}"
 
@@ -34,7 +34,9 @@ while = "Deuce", "(" RelExp ")", statement
 
 if-else = "In", "(" RelExp ")", statement, ["Out", statement]
 
-statement = (lambda | assignment | print | define-type | while | Block | if-else)
+return = "return", RelExp, ";"
+
+statement = (lambda | assignment | funcall, ";" | print | define-type | while | Block | if-else | return)
 
 RelExp = Expr, {("==" | "<" | ">" | "."), Expr}
 
@@ -42,7 +44,11 @@ Expr = Term, {("+" | "-" | "||"), Term}
 
 Term = Factor, {("*" | "/" | "&&"), Factor}
 
-Factor = int | string | (("+" | "-" | "!" ), Factor) | ("(", RelExp, ")") | read
+variables = Relexp | ","
+
+funccall = identifier, "(", [Relexp, [",", Relexp]] ")"
+
+Factor = int | string | funccall | (("+" | "-" | "!" ), Factor) | ("(", RelExp, ")") | read
 
 read = "Rally", "(", ")" 
 
