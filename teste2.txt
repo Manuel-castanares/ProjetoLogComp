@@ -1,0 +1,12 @@
+Court Main() {
+  ace a: i32;
+  ace b: i32;
+  a = 3;
+  b = 10;
+  Deuce(b>0){
+    a = b * a;
+    b = b - 1;
+  }
+  Serve("a final: ");
+  Serve(a);
+}

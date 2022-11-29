@@ -1,0 +1,11 @@
+Court Main() {
+  ace a: i32;
+  ace b: i32;
+  a = Rally();
+  b = Rally();
+  In(a > b){
+    Serve("primeiro valor é maior que o segundo...");
+  } Out {
+    Serve("segundo valor é maior que o primeiro...");
+  }
+}
